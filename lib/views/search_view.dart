@@ -1,55 +1,71 @@
-import 'dart:developer';
-
-import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:weather_app/models/weatherModel.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_app/Cubits/get_weather_cubit/getWeatherCubit.dart';
 
-import '../Services/New_services.dart';
-
-class Search_view extends StatelessWidget {
+import '../main.dart';
+class Searchview extends StatelessWidget {
+  const Searchview({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
 
       appBar: AppBar(
-        title: Text('Search City'),
-      ),
-      body: Container(
+        elevation: 0,
+
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: (){Navigator.pop(context);}
+          ),
+        title:const Text(
+            'Search City',
+          ),),
+        body: Container(
         height: double.infinity,
-        decoration: BoxDecoration(
+        decoration:  BoxDecoration(
             gradient: LinearGradient(
+              begin: Alignment.topLeft,
                 colors: [
+            getThemeColor(BlocProvider.of<GetWeatherCubit>(context).weatherModel?.weatherCondition),
+          // Colors.orange,
                   Colors.white,
-                  Colors.blue,
+
                 ]
             )
         ),
 
         child: Padding(
-          padding:  EdgeInsets.all(20.0),
+          padding:  const EdgeInsets.all(20.0),
           child: TextFormField(
             onFieldSubmitted: (value)async{
-             WeatherModel?  weatherModel=await WeatherService(Dio()).CurrentWeather(cityName: value);
-             log(weatherModel!.cityName);
+             var getWeatherCubit=BlocProvider.of<GetWeatherCubit>(context);
+             getWeatherCubit.getWeather(cityName:value);
+             Navigator.pop(context);
+
             },
             decoration:  InputDecoration(
-              contentPadding: EdgeInsets.all(15),
+              contentPadding: const EdgeInsets.all(15),
               hintText: 'Enter the city',
-              label: Text('Search'),
-              suffix: Icon(Icons.search,color: Colors.indigo,),
+              hintStyle: const TextStyle(color: Colors.black),
+             labelStyle: const TextStyle(color: Colors.black),
+
+              label: const Text('Search',style: TextStyle(fontWeight: FontWeight.bold),),
+              suffix: Icon(Icons.search,color: Colors.grey[800],),
               enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(15),
 
-                  borderSide: BorderSide(color: Colors.black38)),
+                  borderSide: const BorderSide(color: Colors.black)),
               focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
 
-                  borderSide: BorderSide(color: Colors.indigo)),
+                  borderRadius: BorderRadius.circular(15),
+
+
+                  borderSide: const BorderSide(color: Colors.grey,width: 1.5)),
               border: OutlineInputBorder(
-borderRadius: BorderRadius.circular(15),
-                borderSide: BorderSide(color: Colors.black)
+
+              borderRadius: BorderRadius.circular(15),
+                borderSide: const BorderSide(color: Colors.black,width: 4)
               ),
 
             ),

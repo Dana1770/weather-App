@@ -32,7 +32,7 @@ class WeatherModel{
         temp: json['days'][0]['temp'],
         maxTemp: json['days'][0]['tempmax'],
         minTemp: json['days'][0]['tempmin'],
-        weatherCondition: json['days'][0]['description'],
+        weatherCondition: json['days'][0]['conditions'],
         pressure:  json['days'][0]['pressure'],
         date:  json['days'][0]['datetime'],
         rtime: json['days'][0]['sunrise'],

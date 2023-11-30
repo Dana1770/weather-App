@@ -8,14 +8,20 @@ class NoWeatherBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+/*
       decoration: BoxDecoration(
+
           gradient: LinearGradient(
+              begin: Alignment.topLeft,
+
               colors: [
-                Colors.blue,
+                //Colors.orangeAccent,
+               // Colors.yellow,
                 Colors.white,
               ]
           )
       ),
+*/
 
       child: const Padding(
         padding: EdgeInsets.symmetric(horizontal: 16),
@@ -24,7 +30,7 @@ class NoWeatherBody extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'there is no weather 😔 start',
+                'There is no weather 😔 ',
                 style: TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.bold
@@ -32,9 +38,9 @@ class NoWeatherBody extends StatelessWidget {
               ),
               SizedBox(height: 5,),
               Text(
-                'searching now 🔍',
+                'start searching now 🔍',
                 style: TextStyle(
-                  fontSize: 25,
+                  fontSize: 22,
                     fontWeight: FontWeight.bold
 
                 ),
